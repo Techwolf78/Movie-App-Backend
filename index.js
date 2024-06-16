@@ -25,13 +25,39 @@ const app = express();
 
 app.use(express.json());
 
+// Configure CORS
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://movie-app-self-five.vercel.app",
+];
+
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://movie-app-self-five.vercel.app/"],
+    origin: function (origin, callback) {
+      // Allow requests with no origin (e.g., mobile apps, Postman)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg =
+          "The CORS policy for this site does not allow access from the specified origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
     optionsSuccessStatus: 200,
-    credentials: true,
+    credentials: true, // Enable credentials
   })
 );
+
+// Handle preflight requests for /api/v1/auth routes
+app.options("/api/v1/auth/*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.send();
+});
 
 app.use("/api/v1/auth", userRoutes);
 
