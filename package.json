@@ -8,6 +8,7 @@
     "start": "node index.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix ./client"
+    
   },
   "author": "ajay",
   "license": "ISC",
