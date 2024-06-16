@@ -1,0 +1,27 @@
+{
+  "name": "moviebackend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix ./client"
+  },
+  "author": "ajay",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "emailjs-com": "^3.2.0",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.1",
+    "nodemailer": "^6.9.13",
+    "sendgrid": "^5.2.3",
+    "stripe": "^15.11.0",
+    "twilio": "^5.1.1"
+  }
+}
